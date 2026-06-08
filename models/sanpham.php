@@ -20,7 +20,7 @@ class Sanpham {
         } elseif ($sort == 'price_desc') {
             $sql .= " ORDER BY gia DESC";
         } else {
-            $sql .= " ORDER BY id DESC"; // Mới nhất
+            $sql .= " ORDER BY id DESC"; 
         }
 
         $stmt = $this->db->conn->prepare($sql);
@@ -33,7 +33,7 @@ class Sanpham {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            return []; // Trả về mảng rỗng nếu bảng CH chưa có
+            return []; 
         }
     }
 }
