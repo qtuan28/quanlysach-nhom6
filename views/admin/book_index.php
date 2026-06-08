@@ -1,0 +1,39 @@
+<?php ob_start(); ?>
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2 class="page-title" style="margin-bottom: 0;">Danh sách Sách</h2>
+        <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Thêm sách mới</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên sách</th>
+                <th>Thể loại</th>
+                <th>Tác giả</th>
+                <th>Giá</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($books as $book): ?>
+            <tr>
+                <td><?= $book['id'] ?></td>
+                <td><strong><?= htmlspecialchars($book['title']) ?></strong></td>
+                <td><?= htmlspecialchars($book['category_name'] ?? '') ?></td>
+                <td><?= htmlspecialchars($book['author_name'] ?? '') ?></td>
+                <td><?= number_format($book['price'], 0, ',', '.') ?> đ</td>
+                <td>
+                    <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php 
+$content = ob_get_clean(); 
+require 'layout.php'; 
+?>
