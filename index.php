@@ -7,22 +7,36 @@ $controllerName = isset($_GET['controller']) ? $_GET['controller'] : $defaultCon
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-if ($area == 'admin') {
-    if ($controllerName == 'book') {
-        require_once './controllers/admin/BookController.php';
-        $controller = new BookController();
-        if ($action == 'index') {
-            $controller->index();
+switch ($area) {
+    case 'admin':
+        switch ($controllerName) {
+            case 'book':
+                require_once './controllers/admin/BookController.php';
+                $controller = new BookController();
+                switch ($action) {
+                    case 'index':
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
         }
-    }
-} else {
-    require_once './controllers/ProductController.php';
-    $controller = new ProductController();
-    
-    if ($action == 'detail') {
-        $controller->detail();
-    } else {
-        $controller->index();
-    }
+        break;
+
+    case 'user':
+    default:
+        require_once './controllers/ProductController.php';
+        $controller = new ProductController();
+        
+        switch ($action) {
+            case 'detail':
+                $controller->detail();
+                break;
+            case 'index':
+            default:
+                $controller->index();
+                break;
+        }
+        break;
 }
 ?>
