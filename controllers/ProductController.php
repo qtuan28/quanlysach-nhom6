@@ -19,7 +19,6 @@ class ProductController {
             $redirectUrl = strtok($_SERVER["REQUEST_URI"], '?'); 
             $queryParams = [];
             if (isset($_GET['keyword'])) $queryParams['keyword'] = $_GET['keyword'];
-            if (isset($_GET['sort'])) $queryParams['sort'] = $_GET['sort'];
             $queryString = http_build_query($queryParams);
             if (!empty($queryString)) {
                 $redirectUrl .= '?' . $queryString;
@@ -28,9 +27,8 @@ class ProductController {
             exit();
         }
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
-        $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
         $model = new Sanpham();
-        $sp = $model->getAll($keyword, $sort);   
+        $sp = $model->getAll($keyword);   
         $cartCount = 0;
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $qty) {
@@ -39,6 +37,30 @@ class ProductController {
         }
 
         require './views/dssp.php';
+    }
+    public function detail() {
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if ($id <= 0) {
+            header("Location: index.php");
+            exit();
+        }
+        
+        $model = new Sanpham();
+        $sp = $model->getById($id);
+        
+        if (!$sp) {
+            header("Location: index.php");
+            exit();
+        }
+        
+        $cartCount = 0;
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $qty) {
+                $cartCount += $qty;
+            }
+        }
+        
+        require './views/chitiet.php';
     }
 }
 ?>

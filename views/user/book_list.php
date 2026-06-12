@@ -1,3 +1,16 @@
+<?php
+/**
+ * @var string|int $category_id
+ * @var string|int $author_id
+ * @var array $books
+ * @var array $categories
+ * @var array $authors
+ * @var string $keyword
+ * @var int $totalPages
+ * @var int $page
+ * @var string $sort
+ */
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>

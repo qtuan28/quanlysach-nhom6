@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $book
+ */
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
