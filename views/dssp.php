@@ -161,20 +161,20 @@
         <?php if (isset($sp) && !empty($sp)): ?>
             <?php foreach ($sp as $SP): ?>
                 <div class="product-card">
-                    <a href="index.php?action=detail&id=<?= $SP['id'] ?>">
+                    <a href="index.php?act=chitiet&id=<?= $SP['id'] ?>">
                         <?php if(isset($SP['img']) && !empty($SP['img'])): ?>
                             <img src="<?= htmlspecialchars($SP['img']) ?>" alt="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>" class="product-image">
                         <?php else: ?>
                             <div class="product-image" style="display:flex;align-items:center;justify-content:center;color:#9ca3af;">Không có ảnh</div>
                         <?php endif; ?>
                     </a>
-                    <a href="index.php?action=detail&id=<?= $SP['id'] ?>" class="product-title" title="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>">
+                    <a href="index.php?act=chitiet&id=<?= $SP['id'] ?>" class="product-title" title="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>">
                         <?= htmlspecialchars($SP['tenSP'] ?? 'Chưa cập nhật') ?>
                     </a>
                     <div class="product-author"><?= htmlspecialchars($SP['tacgia'] ?? 'Đang cập nhật') ?></div>
                     <div class="product-price"><?= number_format($SP['gia'] ?? 0, 0, ',', '.') ?>đ</div>
                     
-                    <form action="index.php?action=add_cart" method="POST">
+                    <form action="index.php?act=add_cart" method="POST">
                         <input type="hidden" name="id" value="<?= $SP['id'] ?>">
                         <input type="hidden" name="keyword" value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>">
                         <button type="submit" style="width: 100%;">Thêm vào giỏ</button>

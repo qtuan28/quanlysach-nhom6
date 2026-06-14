@@ -13,7 +13,7 @@ class BookController {
                 'title' => $sp['tenSP'],
                 'price' => $sp['gia'],
                 'author_name' => isset($sp['tacgia']) ? $sp['tacgia'] : 'Chưa cập nhật',
-                'category_name' => 'Sách' // Tạm thời để chung
+                'category_name' => 'Sách' 
             ];
         }
         

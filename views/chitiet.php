@@ -161,7 +161,7 @@
                     <p><?= nl2br(htmlspecialchars($sp['mo_ta'] ?? 'Chưa có thông tin mô tả chi tiết cho sản phẩm này.')) ?></p>
                 </div>
 
-                <form action="index.php?action=add_cart" method="POST">
+                <form action="index.php?act=add_cart" method="POST">
                     <input type="hidden" name="id" value="<?= $sp['id'] ?>">
                     <button type="submit">Thêm vào giỏ hàng</button>
                 </form>

@@ -2,30 +2,25 @@
 require_once './models/sanpham.php';
 
 class ProductController {
-    public function index() {
-        if (isset($_GET['action']) && $_GET['action'] == 'add_cart') {
-            $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-            if ($id > 0) {
-                if (!isset($_SESSION['cart'])) {
-                    $_SESSION['cart'] = [];
-                }
-                if (isset($_SESSION['cart'][$id])) {
-                    $_SESSION['cart'][$id]++;
-                } else {
-                    $_SESSION['cart'][$id] = 1;
-                }
+    public function addCart() {
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+        if ($id > 0) {
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
             }
-        
-            $redirectUrl = strtok($_SERVER["REQUEST_URI"], '?'); 
-            $queryParams = [];
-            if (isset($_GET['keyword'])) $queryParams['keyword'] = $_GET['keyword'];
-            $queryString = http_build_query($queryParams);
-            if (!empty($queryString)) {
-                $redirectUrl .= '?' . $queryString;
+            if (isset($_SESSION['cart'][$id])) {
+                $_SESSION['cart'][$id]++;
+            } else {
+                $_SESSION['cart'][$id] = 1;
             }
-            header("Location: " . $redirectUrl);
-            exit();
         }
+    
+        // Quay về trang chủ
+        header("Location: index.php");
+        exit();
+    }
+
+    public function index() {
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
         $model = new Sanpham();
         $sp = $model->getAll($keyword);   
