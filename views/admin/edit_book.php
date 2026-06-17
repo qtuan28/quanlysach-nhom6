@@ -1,3 +1,8 @@
+<?php
+/** @var array $book */
+/** @var array $categories */
+/** @var array $authors */
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
