@@ -1,3 +1,4 @@
+<?php /** @var array $books */ ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -365,6 +366,36 @@
             padding: 0.2rem 0.6rem;
             border-radius: 20px;
         }
+
+        /* PAGINATION */
+        .pagination {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.2s;
+        }
+        .page-link:hover {
+            background: var(--off-white);
+            color: var(--primary);
+        }
+        .page-link.active {
+            background: var(--primary);
+            color: var(--white);
+        }
     </style>
 </head>
 <body>
@@ -462,9 +493,9 @@
                         <button class="btn btn-secondary btn-icon">
                             <i class="fa-solid fa-filter"></i>
                         </button>
-                        <button class="btn btn-primary">
+                        <a href="?area=admin&act=create" class="btn btn-primary">
                             <i class="fa-solid fa-plus"></i> Thêm sách mới
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="table-wrap">
@@ -495,12 +526,12 @@
                                 <td><span class="price-tag"><?= number_format($book['price'], 0, ',', '.') ?> đ</span></td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-warning btn-icon" title="Chỉnh sửa">
+                                        <a href="?area=admin&act=edit&id=<?= $book['id'] ?>" class="btn btn-warning btn-icon" title="Chỉnh sửa">
                                             <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-icon" title="Xóa">
+                                        </a>
+                                        <a href="?area=admin&act=delete&id=<?= $book['id'] ?>" class="btn btn-danger btn-icon" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa sách này không?');">
                                             <i class="fa-solid fa-trash"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -508,6 +539,14 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <?php if(isset($total_pages) && $total_pages > 1): ?>
+                <div class="pagination">
+                    <?php for($i = 1; $i <= $total_pages; $i++): ?>
+                        <a href="?area=admin&page=<?= $i ?>" class="page-link <?= (isset($page) && $page == $i) ? 'active' : '' ?>"><?= $i ?></a>
+                    <?php endfor; ?>
+                </div>
+                <?php endif; ?>
             </div>
 
         </div>

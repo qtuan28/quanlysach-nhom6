@@ -10,12 +10,30 @@ if ($area === 'admin') {
     
     switch ($act) {
         case '/':
+            $controller->index();
+            break;
+        case 'create':
+            $controller->taoform();
+            break;
+        case 'store':
+            $controller->store();
+            break;
+        case 'edit':
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $controller->edit($id);
+            break;
+        case 'update':
+            $controller->update();
+            break;
+        case 'delete':
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $controller->destroy($id);
+            break;
         default:
             $controller->index();
             break;
     }
 } else {
-    // Khu vực người dùng (user)
     require_once './controllers/ProductController.php';
     $controller = new ProductController();
     
