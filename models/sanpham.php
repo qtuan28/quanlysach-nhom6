@@ -9,13 +9,16 @@ class Sanpham {
     }
 
     public function getAll($keyword = '') {
-        $sql = "SELECT * FROM CH WHERE 1=1";
+        $sql = "SELECT b.id, b.title as tenSP, b.price as gia, b.image as img, a.name as tacgia, b.description as mo_ta, 10 as sl 
+                FROM books b 
+                LEFT JOIN authors a ON b.author_id = a.id 
+                WHERE 1=1";
         
         if (!empty($keyword)) {
-            $sql .= " AND tenSP LIKE :keyword";
+            $sql .= " AND b.title LIKE :keyword";
         }
         
-        $sql .= " ORDER BY id DESC";
+        $sql .= " ORDER BY b.id DESC";
 
         $stmt = $this->db->conn->prepare($sql);
         
@@ -31,7 +34,10 @@ class Sanpham {
         }
     }
     public function getById($id) {
-        $sql = "SELECT * FROM CH WHERE id = :id";
+        $sql = "SELECT b.id, b.title as tenSP, b.price as gia, b.image as img, a.name as tacgia, b.description as mo_ta, 10 as sl 
+                FROM books b 
+                LEFT JOIN authors a ON b.author_id = a.id 
+                WHERE b.id = :id";
         $stmt = $this->db->conn->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         try {
