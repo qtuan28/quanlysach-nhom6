@@ -8,22 +8,49 @@ class Sanpham {
         $this->db = new Database();
     }
 
-    public function getAll($keyword = '') {
+    public function getAll($keyword = '', $category_id = 0, $author_id = 0, $min_price = 0, $max_price = 0) {
         $sql = "SELECT b.id, b.title as tenSP, b.price as gia, b.image as img, a.name as tacgia, b.description as mo_ta, 10 as sl 
                 FROM books b 
                 LEFT JOIN authors a ON b.author_id = a.id 
                 WHERE 1=1";
         
+        $params = [];
+
         if (!empty($keyword)) {
-            $sql .= " AND b.title LIKE :keyword";
+            $sql .= " AND (b.title LIKE :keyword OR a.name LIKE :keyword)";
+            $params[':keyword'] = "%$keyword%";
+        }
+
+        if ($category_id > 0) {
+            $sql .= " AND b.category_id = :category_id";
+            $params[':category_id'] = $category_id;
+        }
+
+        if ($author_id > 0) {
+            $sql .= " AND b.author_id = :author_id";
+            $params[':author_id'] = $author_id;
+        }
+
+        if ($min_price > 0) {
+            $sql .= " AND b.price >= :min_price";
+            $params[':min_price'] = $min_price;
+        }
+
+        if ($max_price > 0) {
+            $sql .= " AND b.price <= :max_price";
+            $params[':max_price'] = $max_price;
         }
         
         $sql .= " ORDER BY b.id DESC";
 
         $stmt = $this->db->conn->prepare($sql);
         
-        if (!empty($keyword)) {
-            $stmt->bindValue(':keyword', "%$keyword%", PDO::PARAM_STR);
+        foreach ($params as $key => $value) {
+            if (is_int($value)) {
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
+            } else {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            }
         }
         
         try {
@@ -45,6 +72,28 @@ class Sanpham {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             return false;
+        }
+    }
+
+    public function getAllCategories() {
+        $sql = "SELECT id, name FROM categories ORDER BY name ASC";
+        $stmt = $this->db->conn->prepare($sql);
+        try {
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public function getAllAuthors() {
+        $sql = "SELECT id, name FROM authors ORDER BY name ASC";
+        $stmt = $this->db->conn->prepare($sql);
+        try {
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
         }
     }
 }

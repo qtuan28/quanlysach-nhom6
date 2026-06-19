@@ -8,26 +8,41 @@ class Book {
         $this->db = new Database();
     }
 
-    public function getTotal() {
+    public function getTotal($keyword = '') {
         $sql = "SELECT count(id) as total FROM books";
+        if (!empty($keyword)) {
+            $sql .= " WHERE title LIKE :keyword";
+        }
         $stmt = $this->db->conn->prepare($sql);
+        if (!empty($keyword)) {
+            $stmt->bindValue(':keyword', "%$keyword%", PDO::PARAM_STR);
+        }
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'];
     }
 
-    public function getAll($limit = null, $offset = null) {
+    public function getAll($limit = null, $offset = null, $keyword = '') {
         $sql = "SELECT books.*, categories.name as category_name, authors.name as author_name 
                 FROM books 
                 LEFT JOIN categories ON books.category_id = categories.id 
-                LEFT JOIN authors ON books.author_id = authors.id 
-                ORDER BY books.id DESC";
+                LEFT JOIN authors ON books.author_id = authors.id ";
+
+        if (!empty($keyword)) {
+            $sql .= " WHERE books.title LIKE :keyword ";
+        }
+
+        $sql .= " ORDER BY books.id DESC";
 
         if ($limit !== null && $offset !== null) {
             $sql .= " LIMIT :limit OFFSET :offset";
         }
 
         $stmt = $this->db->conn->prepare($sql);
+
+        if (!empty($keyword)) {
+            $stmt->bindValue(':keyword', "%$keyword%", PDO::PARAM_STR);
+        }
 
         if ($limit !== null && $offset !== null) {
             $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);

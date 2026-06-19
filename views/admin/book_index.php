@@ -489,10 +489,19 @@
                         <i class="fa-solid fa-book"></i>
                         Danh sách Sách
                     </div>
-                    <div class="btn-group">
-                        <button class="btn btn-secondary btn-icon">
-                            <i class="fa-solid fa-filter"></i>
-                        </button>
+                    <div class="btn-group" style="align-items: center; gap: 10px;">
+                        <form action="index.php" method="GET" style="display: flex; gap: 5px;">
+                            <input type="hidden" name="area" value="admin">
+                            <input type="text" name="keyword" placeholder="Tìm tên sách..." value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>" style="padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: var(--radius); outline: none; font-family: var(--font-body); font-size: 0.85rem;">
+                            <button type="submit" class="btn btn-secondary btn-icon" title="Tìm kiếm">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <?php if(isset($keyword) && !empty($keyword)): ?>
+                            <a href="?area=admin" class="btn btn-secondary btn-icon" title="Hủy tìm kiếm">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
+                            <?php endif; ?>
+                        </form>
                         <a href="?area=admin&act=create" class="btn btn-primary">
                             <i class="fa-solid fa-plus"></i> Thêm sách mới
                         </a>
@@ -543,7 +552,7 @@
                 <?php if(isset($total_pages) && $total_pages > 1): ?>
                 <div class="pagination">
                     <?php for($i = 1; $i <= $total_pages; $i++): ?>
-                        <a href="?area=admin&page=<?= $i ?>" class="page-link <?= (isset($page) && $page == $i) ? 'active' : '' ?>"><?= $i ?></a>
+                        <a href="?area=admin&page=<?= $i ?><?= isset($keyword) && !empty($keyword) ? '&keyword='.urlencode($keyword) : '' ?>" class="page-link <?= (isset($page) && $page == $i) ? 'active' : '' ?>"><?= $i ?></a>
                     <?php endfor; ?>
                 </div>
                 <?php endif; ?>

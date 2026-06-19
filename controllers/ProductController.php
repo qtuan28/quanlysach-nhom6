@@ -22,8 +22,20 @@ class ProductController {
 
     public function index() {
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+        $category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : 0;
+        $author_id = isset($_GET['author_id']) ? (int)$_GET['author_id'] : 0;
+        $min_price = isset($_GET['min_price']) ? (int)$_GET['min_price'] : 0;
+        $max_price = isset($_GET['max_price']) ? (int)$_GET['max_price'] : 0;
+
         $model = new Sanpham();
-        $sp = $model->getAll($keyword);   
+        
+        // Fetch categories and authors for filter dropdowns
+        $categories = $model->getAllCategories();
+        $authors = $model->getAllAuthors();
+
+        // Fetch filtered products
+        $sp = $model->getAll($keyword, $category_id, $author_id, $min_price, $max_price);   
+        
         $cartCount = 0;
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $qty) {

@@ -150,10 +150,116 @@
         </div>
     </header>
 
+    <style>
+        /* CSS updates for the filter layout */
+        .toolbar {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 150px;
+        }
+        .form-group label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        .search-input-group {
+            flex: 2;
+            min-width: 250px;
+        }
+        .price-group {
+            display: flex;
+            gap: 10px;
+            flex: 2;
+            min-width: 200px;
+        }
+        .price-group .form-group {
+            min-width: 0;
+        }
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+        .btn-reset {
+            background-color: #f3f4f6;
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .btn-reset:hover {
+            background-color: #e5e7eb;
+        }
+    </style>
     <div class="toolbar">
         <form action="index.php" method="GET" class="search-form">
-            <input type="text" name="keyword" placeholder="Tìm tên sách, tác giả..." value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>">
-            <button type="submit">Tìm kiếm</button>
+            <div class="form-group search-input-group">
+                <label for="keyword">Từ khóa</label>
+                <input type="text" id="keyword" name="keyword" placeholder="Tìm tên sách, tác giả..." value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>">
+            </div>
+            
+            <div class="form-group">
+                <label for="category_id">Thể loại</label>
+                <select name="category_id" id="category_id">
+                    <option value="0">-- Tất cả thể loại --</option>
+                    <?php if(isset($categories)): ?>
+                        <?php foreach($categories as $cat): ?>
+                            <option value="<?= $cat['id'] ?>" <?= (isset($category_id) && $category_id == $cat['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="author_id">Tác giả</label>
+                <select name="author_id" id="author_id">
+                    <option value="0">-- Tất cả tác giả --</option>
+                    <?php if(isset($authors)): ?>
+                        <?php foreach($authors as $author): ?>
+                            <option value="<?= $author['id'] ?>" <?= (isset($author_id) && $author_id == $author['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($author['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+
+            <div class="price-group">
+                <div class="form-group">
+                    <label for="min_price">Giá từ</label>
+                    <input type="number" id="min_price" name="min_price" placeholder="0" min="0" value="<?= isset($min_price) && $min_price > 0 ? $min_price : '' ?>">
+                </div>
+                <div class="form-group">
+                    <label for="max_price">Đến giá</label>
+                    <input type="number" id="max_price" name="max_price" placeholder="Max" min="0" value="<?= isset($max_price) && $max_price > 0 ? $max_price : '' ?>">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Lọc</button>
+                <a href="index.php" class="btn-reset">Xóa bộ lọc</a>
+            </div>
         </form>
     </div>
 

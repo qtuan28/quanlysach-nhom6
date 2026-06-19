@@ -4,14 +4,15 @@ require_once './models/book.php';
 class BookController {
     public function index() {
         $model = new Book();
+        $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
         $limit = 5; // Số sách trên mỗi trang
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         if ($page < 1) $page = 1;
         $offset = ($page - 1) * $limit;
         
-        $total_records = $model->getTotal();
+        $total_records = $model->getTotal($keyword);
         $total_pages = ceil($total_records / $limit); 
-        $books = $model->getAll($limit, $offset);
+        $books = $model->getAll($limit, $offset, $keyword);
         
         require './views/admin/book_index.php';
     }
