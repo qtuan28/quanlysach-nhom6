@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Thể Loại - Tiệm Sách</title>
+    <title>Quản Lý Tác Giả - Tiệm Sách</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
@@ -253,8 +253,8 @@
             gap: 24px;
         }
 
-        /* --- GIỮ NGUYÊN FORM CARD & DATA CARD TỪ CODE CŨ --- */
-        .form-card, .data-card {
+        /* --- DATA CARD --- */
+        .data-card {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.015);
@@ -270,79 +270,6 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
-        }
-
-        .form-inline-box {
-            display: flex;
-            align-items: flex-end;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .form-group {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .form-label-custom {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .form-control-custom {
-            width: 100%;
-            padding: 11px 16px;
-            font-size: 14px;
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            color: #0f172a;
-            outline: none;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-        }
-
-        .form-control-custom:focus {
-            border-color: #00B960;
-            box-shadow: 0 0 0 3px rgba(0, 185, 96, 0.1);
-        }
-
-        .btn-custom {
-            padding: 11px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: none;
-            height: 44px;
-            box-sizing: border-box;
-        }
-
-        .btn-submit-green {
-            background-color: #00B960;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 185, 96, 0.15);
-        }
-        .btn-submit-green:hover {
-            background-color: #009e52;
-            transform: translateY(-1px);
-        }
-
-        .btn-back-gray {
-            background-color: #f1f5f9;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-        .btn-back-gray:hover {
-            background-color: #e2e8f0;
-            color: #1e293b;
         }
 
         .data-card-header {
@@ -402,16 +329,16 @@
         .custom-table tbody tr:hover { background-color: #f8fafc; }
         .table-id { color: #94a3b8; font-weight: 600; }
 
-        .badge-category {
-            background-color: #f0fdf4;
-            color: #166534;
+        .badge-author {
+            background-color: #e0f2fe;
+            color: #0369a1;
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 13px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            border: 1px solid #dcfce7;
+            border: 1px solid #bae6fd;
         }
 
         .action-buttons {
@@ -460,11 +387,11 @@
                 Quản lý Sách
                 <span class="nav-badge">Hot</span>
             </a>
-            <a href="?area=category" class="nav-item active">
+            <a href="?area=category" class="nav-item">
                 <span class="nav-icon"><i class="fa-solid fa-tags"></i></span>
                 Thể loại
             </a>
-            <a href="?area=author" class="nav-item">
+            <a href="?area=author" class="nav-item active">
                 <span class="nav-icon"><i class="fa-solid fa-user-pen"></i></span>
                 Tác giả
             </a>
@@ -499,7 +426,7 @@
                 <div class="breadcrumb">
                     <a href="?area=admin"><i class="fa-solid fa-house"></i> Admin</a>
                     <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                    <span>Thể Loại</span>
+                    <span>Tác Giả</span>
                 </div>
             </div>
 
@@ -519,12 +446,12 @@
             <div class="data-card">
                 <div class="data-card-header">
                     <div class="card-main-title" style="margin-bottom: 0;">
-                        <i class="fa-solid fa-tags" style="color: #00B960;"></i>
-                        Danh sách Thể loại hiện có
+                        <i class="fa-solid fa-user-pen" style="color: #0369a1;"></i>
+                        Danh sách Tác giả hiện có
                     </div>
                     
-                    <a href="?area=category&act=create" class="btn-filter" style="background-color: #22c55e; color: white; border-color: #16a34a; text-decoration: none;">
-                        <i class="fa-solid fa-plus"></i> Thêm thể loại mới
+                    <a href="#" class="btn-filter" style="background-color: #0369a1; color: white; border-color: #0284c7; text-decoration: none;">
+                        <i class="fa-solid fa-plus"></i> Thêm tác giả mới
                     </a>
                 </div>
 
@@ -533,46 +460,28 @@
                         <thead>
                             <tr>
                                 <th style="width: 15%; padding-left: 20px;">ID</th>
-                                <th style="width: 60%;">TÊN THỂ LOẠI</th>
+                                <th style="width: 60%;">TÊN TÁC GIẢ</th>
                                 <th style="width: 25%; text-align: center;">THAO TÁC</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($categories as $item) { 
-                                $catName = mb_strtolower($item['name'], 'UTF-8');
-                                $icon = 'fa-bookmark'; 
-                                if (strpos($catName, 'khoa học') !== false || strpos($catName, 'kỹ thuật') !== false) {
-                                    $icon = 'fa-atom';
-                                } elseif (strpos($catName, 'lịch sử') !== false) {
-                                    $icon = 'fa-book-open';
-                                } elseif (strpos($catName, 'viễn tưởng') !== false) {
-                                    $icon = 'fa-rocket';
-                                } elseif (strpos($catName, 'tiểu thuyết') !== false || strpos($catName, 'văn học') !== false) {
-                                    $icon = 'fa-feather';
-                                } elseif (strpos($catName, 'kỹ năng') !== false) {
-                                    $icon = 'fa-heart';
-                                } elseif (strpos($catName, 'kinh doanh') !== false) {
-                                    $icon = 'fa-chart-line';
-                                }
-                            ?>
+                            <?php foreach ($authors as $item) { ?>
                                 <tr>
                                     <td style="padding-left: 20px;">
                                         <span class="table-id">#<?= $item['id']; ?></span>
                                     </td>
                                     <td>
-                                        <span class="badge-category">
-                                            <i class="fa-solid <?= $icon; ?>" style="margin-right: 8px;"></i>
+                                        <span class="badge-author">
+                                            <i class="fa-solid fa-user" style="margin-right: 8px;"></i>
                                             <?= htmlspecialchars($item['name']); ?>
                                         </span>
                                     </td>
                                     <td style="text-align: center;">
                                         <div class="action-buttons">
-                                            <a href="?area=category&act=edit&id=<?= $item['id']; ?>" class="btn-action btn-edit" title="Sửa">
+                                            <a href="#" class="btn-action btn-edit" title="Sửa">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
-                                            <a href="?area=category&act=delete&id=<?= $item['id']; ?>"
-                                               class="btn-action btn-delete"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa thể loại này?')" title="Xóa">
+                                            <a href="#" class="btn-action btn-delete" title="Xóa">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </div>

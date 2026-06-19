@@ -423,7 +423,7 @@
                 <span class="nav-icon"><i class="fa-solid fa-tags"></i></span>
                 Thể loại
             </a>
-            <a href="#" class="nav-item">
+            <a href="?area=author" class="nav-item">
                 <span class="nav-icon"><i class="fa-solid fa-user-pen"></i></span>
                 Tác giả
             </a>

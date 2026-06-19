@@ -69,6 +69,18 @@ if ($area === 'admin') {
             break;
     }
 
+} elseif ($area === 'author') {
+
+    require_once './controllers/AuthorController.php';
+    $controller = new AuthorController();
+
+    switch ($act) {
+        case '/':
+        default:
+            $controller->index();
+            break;
+    }
+
 } else {
 
     require_once './controllers/ProductController.php';
