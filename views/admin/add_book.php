@@ -55,7 +55,7 @@
                 
                 <div class="form-group">
                     <label>Giá (VNĐ)</label>
-                    <input type="number" name="price" class="form-control" required placeholder="Ví dụ: 150000">
+                    <input type="text" name="price" class="form-control" required placeholder="Ví dụ: 150.000">
                 </div>
 
                 <div class="form-group">
@@ -95,5 +95,29 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const priceInput = document.querySelector('input[name="price"]');
+            if (priceInput) {
+                // Định dạng ngay khi tải trang
+                formatInput(priceInput);
+
+                priceInput.addEventListener('input', function() {
+                    formatInput(this);
+                });
+            }
+
+            function formatInput(input) {
+                let value = input.value.replace(/\D/g, '');
+                if (value) {
+                    // Loại bỏ các chữ số 0 vô nghĩa ở đầu
+                    value = parseInt(value, 10).toString();
+                    input.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                } else {
+                    input.value = '';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

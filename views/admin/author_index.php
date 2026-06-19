@@ -450,7 +450,7 @@
                         Danh sách Tác giả hiện có
                     </div>
                     
-                    <a href="#" class="btn-filter" style="background-color: #0369a1; color: white; border-color: #0284c7; text-decoration: none;">
+                    <a href="?area=author&act=create" class="btn-filter" style="background-color: #0369a1; color: white; border-color: #0284c7; text-decoration: none;">
                         <i class="fa-solid fa-plus"></i> Thêm tác giả mới
                     </a>
                 </div>
@@ -478,10 +478,12 @@
                                     </td>
                                     <td style="text-align: center;">
                                         <div class="action-buttons">
-                                            <a href="#" class="btn-action btn-edit" title="Sửa">
+                                            <a href="?area=author&act=edit&id=<?= $item['id']; ?>" class="btn-action btn-edit" title="Sửa">
                                                 <i class="fa-solid fa-pen"></i>
                                             </a>
-                                            <a href="#" class="btn-action btn-delete" title="Xóa">
+                                            <a href="?area=author&act=delete&id=<?= $item['id']; ?>"
+                                               class="btn-action btn-delete"
+                                               onclick="return confirm('Bạn có chắc chắn muốn xóa tác giả này?')" title="Xóa">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </div>

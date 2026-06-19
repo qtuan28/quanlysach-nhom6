@@ -27,7 +27,7 @@ class BookController {
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = $_POST['title'];
-            $price = $_POST['price'];
+            $price = (float)str_replace(['.', ','], '', $_POST['price']);
             $description = $_POST['description'];
             $category_id = $_POST['category_id'];
             $author_id = $_POST['author_id'];
@@ -60,7 +60,7 @@ class BookController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $title = $_POST['title'];
-            $price = $_POST['price'];
+            $price = (float)str_replace(['.', ','], '', $_POST['price']);
             $description = $_POST['description'];
             $category_id = $_POST['category_id'];
             $author_id = $_POST['author_id'];

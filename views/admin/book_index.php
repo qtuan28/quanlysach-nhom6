@@ -512,6 +512,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Ảnh</th>
                                 <th>Tên sách</th>
                                 <th>Thể loại</th>
                                 <th>Tác giả</th>
@@ -523,6 +524,13 @@
                             <?php foreach($books as $book): ?>
                             <tr>
                                 <td><span class="table-id">#<?= $book['id'] ?></span></td>
+                                <td>
+                                    <?php if(!empty($book['image'])): ?>
+                                        <img src="<?= htmlspecialchars($book['image']) ?>" alt="<?= htmlspecialchars($book['title']) ?>" style="width: 55px; height: 75px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); display: block;">
+                                    <?php else: ?>
+                                        <div style="width: 55px; height: 75px; background: #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gray); border: 1px solid var(--border);"><i class="fa-solid fa-image" style="font-size: 1.2rem;"></i></div>
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <div class="table-name"><?= htmlspecialchars($book['title']) ?></div>
                                 </td>

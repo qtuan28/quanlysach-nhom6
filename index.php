@@ -76,6 +76,21 @@ if ($area === 'admin') {
 
     switch ($act) {
         case '/':
+            $controller->index();
+            break;
+
+        case 'create':
+            $controller->add();
+            break;
+
+        case 'edit':
+            $controller->edit();
+            break;
+
+        case 'delete':
+            $controller->delete();
+            break;
+
         default:
             $controller->index();
             break;
