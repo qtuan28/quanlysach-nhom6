@@ -2,7 +2,7 @@
 class Database {
     private $host = 'localhost';
     private $user = 'root';
-    private $pass = '';
+    private $pass = 'tu12345';
     private $dbname = 'quanly_sach';
     public $conn;
 

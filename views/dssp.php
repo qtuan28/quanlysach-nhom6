@@ -163,7 +163,7 @@
                 <div class="product-card">
                     <a href="index.php?act=chitiet&id=<?= $SP['id'] ?>">
                         <?php if(isset($SP['img']) && !empty($SP['img'])): ?>
-                            <img src="<?= htmlspecialchars($SP['img']) ?>" alt="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>" class="product-image">
+                           <img src="assets/images/<?= htmlspecialchars($SP['img']) ?>" alt="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>" class="product-image">
                         <?php else: ?>
                             <div class="product-image" style="display:flex;align-items:center;justify-content:center;color:#9ca3af;">Không có ảnh</div>
                         <?php endif; ?>
