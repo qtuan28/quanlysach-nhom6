@@ -84,7 +84,7 @@
         }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
         .product-card {
@@ -136,6 +136,39 @@
             color: var(--text-light);
             padding: 50px 0;
             grid-column: 1 / -1;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        .pagination a, .pagination span {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: var(--font-body);
+        }
+        .pagination a {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .pagination a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .pagination .active {
+            background: var(--primary);
+            color: var(--white);
+            border: 1px solid var(--primary);
         }
     </style>
 </head>
@@ -269,7 +302,7 @@
                 <div class="product-card">
                     <a href="index.php?act=chitiet&id=<?= $SP['id'] ?>">
                         <?php if(isset($SP['img']) && !empty($SP['img'])): ?>
-                           <img src="assets/images/<?= htmlspecialchars($SP['img']) ?>" alt="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>" class="product-image">
+                           <img src="<?= htmlspecialchars($SP['img']) ?>" alt="<?= htmlspecialchars($SP['tenSP'] ?? '') ?>" class="product-image">
                         <?php else: ?>
                             <div class="product-image" style="display:flex;align-items:center;justify-content:center;color:#9ca3af;">Không có ảnh</div>
                         <?php endif; ?>
@@ -291,6 +324,38 @@
             <div class="empty-msg">Không tìm thấy sản phẩm nào.</div>
         <?php endif; ?>
     </div>
+
+    <!-- Pagination -->
+    <?php if (isset($total_pages) && $total_pages > 1): ?>
+        <div class="pagination">
+            <?php 
+                $queryParams = $_GET; 
+                if($page > 1): 
+                    $queryParams['page'] = $page - 1;
+            ?>
+                <a href="?<?= http_build_query($queryParams) ?>">&laquo;</a>
+            <?php endif; ?>
+            
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <?php 
+                    $queryParams['page'] = $i;
+                    if ($i == $page): 
+                ?>
+                    <span class="active"><?= $i ?></span>
+                <?php else: ?>
+                    <a href="?<?= http_build_query($queryParams) ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+            
+            <?php 
+                if($page < $total_pages): 
+                    $queryParams['page'] = $page + 1;
+            ?>
+                <a href="?<?= http_build_query($queryParams) ?>">&raquo;</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
 </div>
 
 </body>

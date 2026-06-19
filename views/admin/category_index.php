@@ -20,141 +20,137 @@
             min-height: 100vh;
         }
 
-        /* --- SIDEBAR (Thanh điều hướng bên trái) --- */
+        /* ===== SIDEBAR ===== */
+        :root {
+            --primary: #22c55e;
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-border: rgba(255,255,255,0.06);
+            --white: #ffffff;
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius: 10px;
+        }
+        
         .sidebar {
             width: 260px;
-            background-color: #0f172a; /* Màu tối chuẩn admin dashboard */
-            color: #94a3b8;
+            background: var(--sidebar-bg);
+            color: var(--white);
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             position: fixed;
+            left: 0;
             top: 0;
             bottom: 0;
-            left: 0;
-            z-index: 100;
+            z-index: 50;
+            overflow-y: auto;
         }
 
         .sidebar-brand {
-            padding: 24px;
+            padding: 1.75rem 1.5rem;
+            border-bottom: 1px solid var(--sidebar-border);
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #1e293b;
+            gap: 0.75rem;
         }
-
-        .sidebar-brand .logo-icon {
-            background-color: #00B960;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+        .sidebar-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 1.1rem;
+            color: var(--white);
+            flex-shrink: 0;
         }
-
-        .sidebar-brand .logo-text {
-            color: #ffffff;
-            font-size: 18px;
+        .sidebar-brand-text {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
             font-weight: 700;
         }
-
-        .sidebar-brand .logo-sub {
-            font-size: 11px;
-            color: #64748b;
-            display: block;
+        .sidebar-brand-text span { color: var(--primary); }
+        .sidebar-brand-sub {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            font-family: var(--font-body);
             font-weight: 400;
+            letter-spacing: 0.3px;
         }
 
-        .sidebar-menu {
-            padding: 24px 16px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .sidebar-section {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--sidebar-border);
         }
-
-        .menu-heading {
-            font-size: 11px;
+        .sidebar-section-title {
+            font-size: 0.65rem;
+            font-family: var(--font-heading);
             font-weight: 700;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #475569;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            padding-left: 12px;
+            color: rgba(255,255,255,0.3);
+            padding: 0 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .menu-item {
+        .nav-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 12px;
-            border-radius: 8px;
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 14px;
+            gap: 0.75rem;
+            padding: 0.8rem 1.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            position: relative;
+            text-decoration: none;
         }
-
-        .menu-item .item-link {
+        .nav-item:hover {
+            background: var(--sidebar-hover);
+            color: var(--white);
+        }
+        .nav-item.active {
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+        .nav-item.active .nav-icon { color: var(--primary); }
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius);
+            background: rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
-
-        .menu-item:hover {
-            background-color: #1e293b;
-            color: #ffffff;
+        .nav-item:hover .nav-icon {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
         }
-
-        /* Trạng thái đang hoạt động (Active) cho menu Thể Loại */
-        .menu-item.active {
-            background-color: rgba(0, 185, 96, 0.1);
-            color: #00B960;
-            font-weight: 600;
+        .nav-item.active .nav-icon {
+            background: rgba(34,197,94,0.15);
+            color: var(--primary);
         }
-
-        .badge-hot {
-            background-color: #00B960;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
+        .nav-badge {
+            margin-left: auto;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
             font-weight: 700;
-            text-transform: uppercase;
         }
 
         .sidebar-footer {
-            padding: 16px 24px;
-            border-top: 1px solid #1e293b;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background-color: #0b0f19;
-        }
-
-        .sidebar-footer img, .avatar-placeholder {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #00B960;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .user-info .user-name {
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .user-info .user-role {
-            font-size: 11px;
-            color: #64748b;
+            margin-top: auto;
+            border-top: 1px solid var(--sidebar-border);
         }
 
         /* --- MAIN CONTENT WINDOW (Vùng nội dung chính) --- */
@@ -445,61 +441,55 @@
 
 <body>
 
-    <div class="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
         <div class="sidebar-brand">
-            <div class="logo-icon">
-                <i class="fa-solid fa-book"></i>
+            <div class="sidebar-brand-icon">
+                <i class="fa-solid fa-book-open-reader"></i>
             </div>
             <div>
-                <span class="logo-text">TiệmSách</span>
-                <span class="logo-sub">Admin Dashboard</span>
+                <div class="sidebar-brand-text">Tiệm<span>Sách</span></div>
+                <div class="sidebar-brand-sub">Admin Dashboard</div>
             </div>
         </div>
 
-        <div class="sidebar-menu">
-            <div class="menu-heading">Điều hướng chính</div>
-            
-            <a href="?area=book" class="menu-item">
-                <div class="item-link">
-                    <i class="fa-solid fa-book-open"></i>
-                    <span>Quản Lý Sách</span>
-                </div>
-                <span class="badge-hot">Hot</span>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Điều hướng chính</div>
+            <a href="?area=admin" class="nav-item">
+                <span class="nav-icon"><i class="fa-solid fa-book"></i></span>
+                Quản lý Sách
+                <span class="nav-badge">Hot</span>
             </a>
-
-            <a href="?area=category" class="menu-item active">
-                <div class="item-link">
-                    <i class="fa-solid fa-tags"></i>
-                    <span>Thể Loại</span>
-                </div>
+            <a href="?area=category" class="nav-item active">
+                <span class="nav-icon"><i class="fa-solid fa-tags"></i></span>
+                Thể loại
             </a>
-
-            <a href="?area=author" class="menu-item">
-                <div class="item-link">
-                    <i class="fa-solid fa-user-feather"></i>
-                    <span>Tác Giả</span>
-                </div>
+            <a href="#" class="nav-item">
+                <span class="nav-icon"><i class="fa-solid fa-user-pen"></i></span>
+                Tác giả
             </a>
+        </div>
 
-            <div class="menu-heading" style="margin-top: 16px;">Khác</div>
-            <a href="index.php" class="menu-item">
-                <div class="item-link">
-                    <i class="fa-solid fa-shop"></i>
-                    <span>Về trang bán hàng</span>
-                </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Khác</div>
+            <a href="index.php" class="nav-item">
+                <span class="nav-icon"><i class="fa-solid fa-store"></i></span>
+                Về trang bán hàng
             </a>
         </div>
 
         <div class="sidebar-footer">
-            <div class="avatar-placeholder">
-                <i class="fa-solid fa-user-shield"></i>
-            </div>
-            <div class="user-info">
-                <div class="user-name">Admin</div>
-                <div class="user-role">Quản trị viên</div>
+            <div class="nav-item" style="padding: 1.25rem 1.5rem;">
+                <span class="nav-icon" style="background: rgba(34,197,94,0.1); color: var(--primary);">
+                    <i class="fa-solid fa-circle-user"></i>
+                </span>
+                <div>
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--white);">Admin</div>
+                    <div style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">Quản trị viên</div>
+                </div>
             </div>
         </div>
-    </div>
+    </aside>
 
     <div class="main-content">
         
@@ -526,35 +516,6 @@
 
         <div class="content-body">
             
-            <div class="form-card">
-                <div class="card-main-title">
-                    <i class="fa-solid fa-square-plus" style="color: #00B960;"></i>
-                    Thêm thể loại sách mới
-                </div>
-
-                <form method="POST">
-                    <div class="form-inline-box">
-                        <div class="form-group">
-                            <label class="form-label-custom">Tên thể loại sách</label>
-                            <input
-                                type="text"
-                                name="name"
-                                class="form-control-custom"
-                                placeholder="Nhập tên thể loại (Ví dụ: Lịch sử, Kỹ năng sống...)"
-                                required>
-                        </div>
-
-                        <button type="submit" class="btn-custom btn-submit-green">
-                            <i class="fa-solid fa-plus"></i> Thêm mới
-                        </button>
-
-                        <a href="?area=admin" class="btn-custom btn-back-gray">
-                            <i class="fa-solid fa-arrow-left"></i> Quay lại Admin
-                        </a>
-                    </div>
-                </form>
-            </div>
-
             <div class="data-card">
                 <div class="data-card-header">
                     <div class="card-main-title" style="margin-bottom: 0;">
@@ -562,9 +523,9 @@
                         Danh sách Thể loại hiện có
                     </div>
                     
-                    <button class="btn-filter">
-                        <i class="fa-solid fa-filter"></i> Lọc
-                    </button>
+                    <a href="?area=category&act=create" class="btn-filter" style="background-color: #22c55e; color: white; border-color: #16a34a; text-decoration: none;">
+                        <i class="fa-solid fa-plus"></i> Thêm thể loại mới
+                    </a>
                 </div>
 
                 <div class="table-wrap">

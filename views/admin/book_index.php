@@ -419,7 +419,7 @@
                 Quản lý Sách
                 <span class="nav-badge">Hot</span>
             </a>
-            <a href="?area=category" class="nav-item active">
+            <a href="?area=category" class="nav-item">
                 <span class="nav-icon"><i class="fa-solid fa-tags"></i></span>
                 Thể loại
             </a>

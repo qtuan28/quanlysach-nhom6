@@ -27,14 +27,24 @@ class ProductController {
         $min_price = isset($_GET['min_price']) ? (int)$_GET['min_price'] : 0;
         $max_price = isset($_GET['max_price']) ? (int)$_GET['max_price'] : 0;
 
+        // Pagination
+        $limit = 12; // 12 sản phẩm mỗi trang
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        if ($page < 1) $page = 1;
+        $offset = ($page - 1) * $limit;
+
         $model = new Sanpham();
         
         // Fetch categories and authors for filter dropdowns
         $categories = $model->getAllCategories();
         $authors = $model->getAllAuthors();
 
+        // Count total products for pagination
+        $total_records = $model->getTotal($keyword, $category_id, $author_id, $min_price, $max_price);
+        $total_pages = ceil($total_records / $limit);
+
         // Fetch filtered products
-        $sp = $model->getAll($keyword, $category_id, $author_id, $min_price, $max_price);   
+        $sp = $model->getAll($keyword, $category_id, $author_id, $min_price, $max_price, $limit, $offset);   
         
         $cartCount = 0;
         if (isset($_SESSION['cart'])) {
