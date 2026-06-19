@@ -92,10 +92,6 @@ if ($area === 'admin') {
             $controller->detail();
             break;
 
-        case 'add_cart':
-            $controller->addCart();
-            break;
-
         case '/':
         default:
             $controller->index();

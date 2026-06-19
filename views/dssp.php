@@ -3,7 +3,6 @@
  * @var array $sp
  * @var string $keyword
  * @var string $sort
- * @var int $cartCount
  */
 ?>
 <!DOCTYPE html>
@@ -179,7 +178,6 @@
         <a href="index.php" style="text-decoration: none;"><h1>Tiệm Sách</h1></a>
         <div class="header-links">
             <a href="index.php">Trang chủ</a>
-            <a href="#">Giỏ hàng (<?= isset($cartCount) ? $cartCount : 0 ?>)</a>
         </div>
     </header>
 
@@ -312,12 +310,6 @@
                     </a>
                     <div class="product-author"><?= htmlspecialchars($SP['tacgia'] ?? 'Đang cập nhật') ?></div>
                     <div class="product-price"><?= number_format($SP['gia'] ?? 0, 0, ',', '.') ?>đ</div>
-                    
-                    <form action="index.php?act=add_cart" method="POST">
-                        <input type="hidden" name="id" value="<?= $SP['id'] ?>">
-                        <input type="hidden" name="keyword" value="<?= isset($keyword) ? htmlspecialchars($keyword) : '' ?>">
-                        <button type="submit" style="width: 100%;">Thêm vào giỏ</button>
-                    </form>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

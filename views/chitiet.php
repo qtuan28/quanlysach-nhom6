@@ -2,7 +2,6 @@
 
 /**
  * @var array $sp
- * @var int $cartCount
  */
 ?>
 <!DOCTYPE html>
@@ -174,7 +173,6 @@
             </a>
             <div class="header-links">
                 <a href="index.php">Trang chủ</a>
-                <a href="#">Giỏ hàng (<?= isset($cartCount) ? $cartCount : 0 ?>)</a>
             </div>
         </header>
 
@@ -205,11 +203,6 @@
                         <h3>Giới thiệu nội dung</h3>
                         <p><?= nl2br(htmlspecialchars($sp['mo_ta'] ?? 'Chưa có thông tin mô tả chi tiết cho sản phẩm này.')) ?></p>
                     </div>
-
-                    <form action="index.php?act=add_cart" method="POST">
-                        <input type="hidden" name="id" value="<?= $sp['id'] ?>">
-                        <button type="submit">Thêm vào giỏ hàng</button>
-                    </form>
                 </div>
             </div>
         <?php else: ?>
